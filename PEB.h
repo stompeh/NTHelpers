@@ -19,7 +19,7 @@ typedef struct _UNICODE_STRING
 	USHORT MaximumLength;
 	LPCWSTR Buffer;
 
-} UNICODE_STRING, *PPUNICODE_STRING;
+} UNICODE_STRING, *PUNICODE_STRING;
 
 typedef struct _CURDIR
 {
