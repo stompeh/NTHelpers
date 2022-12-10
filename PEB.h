@@ -17,14 +17,14 @@ typedef struct _UNICODE_STRING
 {
 	USHORT Length;
 	USHORT MaximumLength;
-	LPCWSTR Buffer;
+	PWSTR Buffer;
 
-} UNICODE_STRING, *PUNICODE_STRING;
+} UNICODE_STRING, *PPUNICODE_STRING;
 
 typedef struct _CURDIR
 {
 	UNICODE_STRING DosPath;
-	PVOID Handle;
+	HANDLE Handle;
 
 } CURDIR, *PCURDIR;
 
@@ -32,7 +32,7 @@ typedef struct _PEB_LDR_DATA
 {
 	ULONG Length;
 	BOOLEAN Initialized;
-	PVOID SsHandle;
+	HANDLE SsHandle;
 	LIST_ENTRY InLoadOrderModuleList;
 	LIST_ENTRY InMemoryOrderModuleList;
 	LIST_ENTRY InInitializationOrderModuleList;
@@ -134,6 +134,7 @@ typedef struct _PEB
 	}u1;
 
 	UCHAR Padding0[4];
+
 	HANDLE Mutant;
 	PVOID ImageBaseAddress;
 	PPEB_LDR_DATA Ldr;
@@ -143,6 +144,7 @@ typedef struct _PEB
 	PRTL_CRITICAL_SECTION FastPebLock;
 	PSLIST_HEADER AtlThunkSListPtr;
 	PVOID IFEOKey;
+
 	union
 	{
 		ULONG CrossProcessFlags;
@@ -173,30 +175,38 @@ typedef struct _PEB
 	PVOID ApiSetMap;
 	ULONG TlsExpansionCounter;
 	UCHAR Padding2[4];
+
 	PVOID TlsBitmap;
 	ULONG TlsBitmapBits[2];
+
 	PVOID ReadOnlySharedMemoryBase;
 	PVOID SharedData;
 	PVOID* ReadOnlyStaticServerData;
 	PVOID AnsiCodePageData;
 	PVOID OemCodePageData;
 	PVOID UnicodeCaseTableData;
+
 	ULONG NumberOfProcessors;
 	ULONG NtGlobalFlag;
+
 	LARGE_INTEGER CriticalSectionTimeout;
+
 	SIZE_T HeapSegmentReserve;
 	SIZE_T HeapSegmentCommit;
 	SIZE_T HeapDeCommitTotalFreeThreshold;
 	SIZE_T HeapDecommitFreeBlockThreshold;
+
 	ULONG NumberOfHeaps;
 	ULONG MaximumNumberOfHeaps;
 	PVOID* ProcessHeaps;
+
 	PVOID GdiSharedHandleTable;
 	PVOID ProcessStarterHelper;
 	ULONG GdiDCAttributeList;
 	UCHAR Padding3[4];
 
 	PRTL_CRITICAL_SECTION LoaderLock;
+
 	ULONG OSMajorVersion;
 	ULONG OSMinorVersion;
 	USHORT OSBuildNumber;
@@ -213,12 +223,12 @@ typedef struct _PEB
 	PVOID PostProcessInitRoutine;
 	PVOID TlsExpansionBitmap;
 	ULONG TlsExpansionBitmapBits[32];
+
 	ULONG SessionId;
 	UCHAR Padding5[4];
 
 	ULARGE_INTEGER AppCompatFlags;
 	ULARGE_INTEGER AppCompatFlagsUser;
-
 	PVOID pShimData;
 	PVOID AppCompatInfo;
 
@@ -227,9 +237,7 @@ typedef struct _PEB
 
 	PASSEMBLY_STORAGE_MAP ProcessAssemblyStorageMap;
 	PACTIVATION_CONTEXT_DATA SystemDefaultActivationContextData;
-
 	PASSEMBLY_STORAGE_MAP SystemAssemblyStorageMap;
-
 	SIZE_T MinimumStackCommit;
 
 	PVOID SparePointers[4];
@@ -254,15 +262,18 @@ typedef struct _PEB
 	}u4;
 
 	UCHAR Padding6[4];
+
 	SIZE_T CsrServerReadOnlySharedMemoryBase;
 	SIZE_T TppWorkerpListLock;
 	LIST_ENTRY TppWorkerpList;
 	PVOID WaitOnAddressHashTable[128];
+
 	PVOID TelemetryCoverageHeader;
 	ULONG CloudFileFlags;
 	ULONG CloudFileDiagFlags;
 	CHAR PlaceholderCompatibilityMode;
 	CHAR PlaceholderCompatibilityModeReserved[7];
+
 	PLEAP_SECOND_DATA LeapSecondData;
 
 	union
