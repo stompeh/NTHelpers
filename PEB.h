@@ -161,8 +161,8 @@ typedef struct _PEB
 			ULONG ProcessCurrentyThrottled : 1;
 			ULONG ProcessImagesHotPatched : 1;
 			ULONG ReservedBits0 : 24;
-		}s2;
-	}u2;
+		}stCrossProcessFlags;
+	}unCrossProcessFlags;
 
 	UCHAR Padding1[4];
 
@@ -170,7 +170,7 @@ typedef struct _PEB
 	{
 		PVOID KernelCallbackTable;
 		PVOID UserSharedInfoPtr;
-	}u3;
+	}unKernCallbackTable_UserSharedInfoPtr;
 
 	ULONG SystemReserved;
 	ULONG AtlThunkSListPtr32;
@@ -260,8 +260,8 @@ typedef struct _PEB
 			ULONG CritSecTracingEnabled : 1;
 			ULONG LibLoaderTracingEnabled : 1;
 			ULONG SpareTracingBits : 29;
-		}s3;
-	}u4;
+		}stTracingFlags;
+	}unTracingFlags;
 
 	UCHAR Padding6[4];
 
@@ -285,8 +285,8 @@ typedef struct _PEB
 		{
 			ULONG SixtySecondEnabled : 1;
 			ULONG Reserved : 31;
-		}s4;
-	}u5;
+		}stLeapSecondFlag;
+	}unLeapSecondFlag;
 
 	ULONG NtGlobalFlag2;
 
