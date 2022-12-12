@@ -57,7 +57,7 @@ typedef struct _RTL_USER_PROCESS_PARAMETERS
 	ULONG Length;
 	ULONG Flags;
 	ULONG DebugFlags;
-	PVOID ConsoleHandle;
+	HANDLE ConsoleHandle;
 	ULONG ConsoleFlags;
 	PVOID StandardInput;
 	PVOID StandardOutput;
@@ -67,6 +67,7 @@ typedef struct _RTL_USER_PROCESS_PARAMETERS
 	UNICODE_STRING ImagePathName;
 	UNICODE_STRING CommandLine;
 	PVOID Environment;
+
 	ULONG StartingX;
 	ULONG StartingY;
 	ULONG CountX;
@@ -78,6 +79,7 @@ typedef struct _RTL_USER_PROCESS_PARAMETERS
 	UNICODE_STRING DesktopInfo;
 	UNICODE_STRING ShellInfo;
 	UNICODE_STRING RuntimeData;
+
 	RTL_DRIVE_LETTER_CURDIR CurrentDirectores[32];
 	SIZE_T EnvironmentSize;
 	SIZE_T EnvironmentVersion;
@@ -86,21 +88,21 @@ typedef struct _RTL_USER_PROCESS_PARAMETERS
 	ULONG LoaderThreads;
 	UNICODE_STRING RedirectionDllName;
 	UNICODE_STRING HeapPartitionName;
-	SIZE_T* DefaultThreadpoolCpuSetMasks;
-	SIZE_T DefaultThreadpoolCpuSetMaskCount;
-	SIZE_T DefaultThreadpoolThreadMaximum;
+	PSIZE_T DefaultThreadpoolCpuSetMasks;
+	ULONG DefaultThreadpoolCpuSetMaskCount;
+	ULONG DefaultThreadpoolThreadMaximum;
 
 }RTL_USER_PROCESS_PARAMETERS, *PRTL_USER_PROCESS_PARAMETERS;
 
 
 typedef struct _ACTIVATION_CONTEXT_DATA
 {
-	//Not used
+	// Empty
 } ACTIVATION_CONTEXT_DATA, *PACTIVATION_CONTEXT_DATA;
 
 typedef struct _ASSEMBLY_STORAGE_MAP
 {
-	//Not used
+	// Empty
 } ASSEMBLY_STORAGE_MAP, *PASSEMBLY_STORAGE_MAP;
 
 typedef struct _LEAP_SECOND_DATA
@@ -130,8 +132,8 @@ typedef struct _PEB
 			BOOLEAN IsAppContainer : 1;
 			BOOLEAN IsProtectedProcessLight : 1;
 			BOOLEAN IsLongPathAwareProcess : 1;
-		}s1;
-	}u1;
+		}stProcessFlags;
+	}unProcessFlags;
 
 	UCHAR Padding0[4];
 
@@ -289,4 +291,3 @@ typedef struct _PEB
 	ULONG NtGlobalFlag2;
 
 } PEB, *PPEB;
-
